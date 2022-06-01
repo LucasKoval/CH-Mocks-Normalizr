@@ -2,8 +2,8 @@
 const express = require('express')
 const { Server: HttpServer } = require('http')
 const { Server: IOServer } = require('socket.io')
-const productsController = require('./helpers/productsController')
-const messagesController = require('./helpers/messagesController')
+const productsController = require('./src/Helpers/productsController')
+const messagesController = require('./src/Helpers/messagesController')
 
 //----------* EXPRESS() *----------//
 const app = express()
@@ -17,11 +17,11 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 //----------* ROUTES *----------//
-app.use('/', (req, res) => {
+app.use('/', async (req, res) => {
   try {
     res.sendFile(process.cwd() + '/public/index.html')
   } catch (error) {
-    console.log(`ERROR: ${error}`)
+    console.log(error)
   }
 })
 
@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
   socket.on('addNewProduct', async (newProduct) => {
     await productsController.addNewProduct(newProduct)
     const allProducts = await productsController.getAllProduct()
-    socket.emit('updateProductList', allProducts)
+    socket.emit('addProductToList', allProducts)
   })
 
   socket.on('addNewMessage', async (newMessage) => {
@@ -53,7 +53,7 @@ io.on('connection', (socket) => {
 })
 
 //----------* SERVER CONFIGURATION *----------//
-const PORT = 8080
+const PORT = process.env.PORT || 8080
 const server = httpServer.listen(PORT, () => {
   console.log(`Server running on: http://localhost:${server.address().port}/`)
 })

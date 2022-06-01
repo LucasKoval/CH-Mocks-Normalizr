@@ -1,21 +1,30 @@
 //----------* REQUIRE'S *----------//
-const Controller = require('../classes/fileManagement')
-const productDB = new Controller('products')
+const KnexContainer = require('../Classes/knexContainer')
+const mariaDBConfig = require('../Config/mariaDB')
+const SqlClient = new KnexContainer(mariaDBConfig, 'products')
 
-//----------* PRODUCTS ROUTES *----------//
+//----------* PRODUCTS CONTROLLER *----------//
 const productsController = {
+  loadInitialData: async () => {
+    try {
+      await SqlClient.initialLoad()
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
   getAllProduct: async () => {
     try {
-      const allProducts = await productDB.getAll()
+      const allProducts = await SqlClient.getAll()
       return allProducts
     } catch (error) {
-      console.log(`ERROR: ${error}`)
+      console.log(error)
     }
   },
 
   addNewProduct: async (product) => {
     try {
-      const prevProducts = await productDB.getAll()
+      const prevProducts = await SqlClient.getAll()
       const noImage =
         'https://cdn4.iconfinder.com/data/icons/basic-ui-element-flat-style/512/Basic_UI_Elements_-_2.3_-_Flat_Style_-_36-02-64.png'
 
@@ -44,9 +53,9 @@ const productsController = {
         thumbnail: isValidURL(product.thumbnail) ? product.thumbnail : noImage,
       }
 
-      await productDB.addItem(newProduct)
+      await SqlClient.addItem(newProduct)
     } catch (error) {
-      console.log(`ERROR: ${error}`)
+      console.log(error)
     }
   },
 }

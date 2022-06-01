@@ -31,6 +31,7 @@ $(function () {
     const compiledHbsTemplate = Handlebars.compile(layoutText)
     const html = compiledHbsTemplate({ allProducts })
     productContainer.empty().append(html)
+    socket.emit('productListRequest')
   }
 
   //----------* CHAT ROOM SECTION *----------//
@@ -57,5 +58,6 @@ $(function () {
     const compiledHbsTemplate = Handlebars.compile(layoutText)
     const html = compiledHbsTemplate({ allMessages })
     chatContainer.empty().append(html)
+    socket.emit('chatMessagesRequest')
   }
 })
