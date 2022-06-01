@@ -1,25 +1,29 @@
 {
-  "name": "challenge-websockets",
+  "name": "challenge-first-database",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node .",
-    "dev": "nodemon .",
+    "init": "node createTables.js",
+    "start": "npm run init && node server.js",
+    "dev": "npm run init && nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LucasKoval/CH-Websockets.git"
+    "url": "git+https://github.com/LucasKoval/CH-First-DataBase.git"
   },
   "author": "Lucas Koval",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/LucasKoval/CH-Websockets/issues"
+    "url": "https://github.com/LucasKoval/CH-First-DataBase/issues"
   },
-  "homepage": "https://github.com/LucasKoval/CH-Websockets#readme",
+  "homepage": "https://github.com/LucasKoval/CH-First-DataBase#readme",
   "dependencies": {
-    "express": "^4.17.3",
-    "socket.io": "^4.4.1"
+    "express": "^4.18.1",
+    "socket.io": "^4.4.1",
+    "knex": "^2.0.0",
+    "mysql2": "^2.3.3",
+    "sqlite3": "^5.0.7"
   }
 }
