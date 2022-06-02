@@ -2,12 +2,28 @@
 const KnexContainer = require('../Classes/knexContainer')
 const mariaDBConfig = require('../Config/mariaDB')
 const SqlClient = new KnexContainer(mariaDBConfig, 'products')
+const { generateNewId, generateNewProduct } = require('../Utils/productGenerator')
 
 //----------* PRODUCTS CONTROLLER *----------//
 const productsController = {
   loadInitialData: async () => {
     try {
       await SqlClient.initialLoad()
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  populate: async (cant = 5) => {
+    try {
+      const fakeProducts = []
+      for (let i = 0; i < cant; i++) {
+        const newProduct = generateNewProduct(generateNewId())
+        await SqlClient.addItem(newProduct)
+        fakeProducts.push(newProduct)
+      }
+      console.log('fakeProducts', fakeProducts)
+      return fakeProducts
     } catch (error) {
       console.log(error)
     }
