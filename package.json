@@ -1,29 +1,24 @@
 {
-  "name": "challenge-first-database",
+  "name": "ch-mocks-normalizr",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "src/app.js",
   "scripts": {
-    "init": "node createTables.js",
-    "start": "npm run init && node server.js",
-    "dev": "npm run init && nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node .",
+    "dev": "nodemon ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LucasKoval/CH-First-DataBase.git"
+    "url": "git+https://github.com/LucasKoval/CH-Mocks-Normalizr.git"
   },
   "author": "Lucas Koval",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/LucasKoval/CH-First-DataBase/issues"
+    "url": "https://github.com/LucasKoval/CH-Mocks-Normalizr/issues"
   },
-  "homepage": "https://github.com/LucasKoval/CH-First-DataBase#readme",
+  "homepage": "https://github.com/LucasKoval/CH-Mocks-Normalizr#readme",
   "dependencies": {
     "express": "^4.18.1",
-    "socket.io": "^4.4.1",
-    "knex": "^2.0.0",
-    "mysql2": "^2.3.3",
-    "sqlite3": "^5.0.7"
+    "socket.io": "^4.4.1"
   }
 }

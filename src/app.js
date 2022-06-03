@@ -2,8 +2,8 @@
 const express = require('express')
 const { Server: HttpServer } = require('http')
 const { Server: IOServer } = require('socket.io')
-const productsController = require('./src/Helpers/productsController')
-const messagesController = require('./src/Helpers/messagesController')
+const productController = require('./Controllers/productController')
+const messagesController = require('./Controllers/messagesController')
 
 //----------* EXPRESS() *----------//
 const app = express()
@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
   socket.emit('socketConnected')
 
   socket.on('productListRequest', async () => {
-    const allProducts = await productsController.getAllProduct()
+    const allProducts = await productController.getAllProducts()
     socket.emit('updateProductList', allProducts)
   })
 
@@ -40,8 +40,8 @@ io.on('connection', (socket) => {
   })
 
   socket.on('addNewProduct', async (newProduct) => {
-    await productsController.addNewProduct(newProduct)
-    const allProducts = await productsController.getAllProduct()
+    await productController.addNewProduct(newProduct)
+    const allProducts = await productController.getAllProducts()
     socket.emit('addProductToList', allProducts)
   })
 

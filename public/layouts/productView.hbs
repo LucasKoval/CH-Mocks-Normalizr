@@ -10,11 +10,11 @@
     <tbody>
       {{#each allProducts}}
         <tr>
-          <th scope='row' class='ps-4 align-middle'>{{this.title}}</th>
+          <th scope='row' class='ps-4 align-middle'>{{this.name}}</th>
           <td class='text-center align-middle'>{{this.price}}</td>
           <td>
             <div class='image-container text-center'>
-              <img src='{{this.thumbnail}}' alt='Product image' class='img-thumbnail' />
+              <img src='{{this.image}}' alt='Product image' class='img-thumbnail' />
             </div>
           </td>
         </tr>

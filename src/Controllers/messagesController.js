@@ -1,21 +1,12 @@
 //----------* REQUIRE'S *----------//
-const KnexContainer = require('../Classes/knexContainer')
-const sqlite3Config = require('../Config/SQLite3')
-const SqlClient = new KnexContainer(sqlite3Config, 'messages')
+const FileSystemContainer = require('../Classes/FileSystemContainer')
+const messagesDB = new FileSystemContainer('messages')
 
 //----------* MESSAGES CONTROLLER *----------//
 const messagesController = {
-  createMessagesTable: async () => {
-    try {
-      await SqlClient.createTable()
-    } catch (error) {
-      console.log(error)
-    }
-  },
-
   getAllMessages: async () => {
     try {
-      const allMessages = await SqlClient.getAll()
+      const allMessages = await messagesDB.getAll()
       return allMessages
     } catch (error) {
       console.log(error)
@@ -24,7 +15,7 @@ const messagesController = {
 
   addNewMessage: async (message) => {
     try {
-      const prevMessages = await SqlClient.getAll()
+      const prevMessages = await messagesDB.getAll()
       const currentDate = new Date().toLocaleString()
 
       const getNewId = () => {
@@ -42,7 +33,7 @@ const messagesController = {
         messageText: message.messageText ? message.messageText : '(Empty message)',
       }
 
-      await SqlClient.addItem(newMessage)
+      await messagesDB.addItem(newMessage)
     } catch (error) {
       console.log(error)
     }
