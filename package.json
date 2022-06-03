@@ -2,11 +2,10 @@
   "name": "ch-mocks-normalizr",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "src/app.js",
   "scripts": {
-    "init": "node createTables.js",
-    "start": "npm run init && node server.js",
-    "dev": "npm run init && nodemon server.js"
+    "start": "node .",
+    "dev": "nodemon ."
   },
   "repository": {
     "type": "git",
@@ -20,12 +19,7 @@
   "homepage": "https://github.com/LucasKoval/CH-Mocks-Normalizr#readme",
   "dependencies": {
     "express": "^4.18.1",
-    "express-handlebars": "^6.0.5",
-    "knex": "^2.0.0",
-    "mysql2": "^2.3.3",
-    "normalizr": "^3.6.2",
-    "socket.io": "^4.4.1",
-    "sqlite3": "^5.0.7"
+    "socket.io": "^4.4.1"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.1.0"

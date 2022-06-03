@@ -14,9 +14,9 @@ $(function () {
     event.preventDefault()
 
     const newProduct = {
-      title: productForm[0][0].value,
+      name: productForm[0][0].value,
       price: productForm[0][1].value,
-      thumbnail: productForm[0][2].value,
+      image: productForm[0][2].value,
     }
 
     socket.emit('addNewProduct', newProduct)
